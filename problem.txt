@@ -1,8 +1,8 @@
-# # # # #
- # * # #
-  # # #
+	#
    # #
-    #
+  # * #
+ # # # #	
+# # # # #
 	
 un nodo tiene compañeros si sus espacios en blando de izq y der
 tienen compañia y si sus espacios en blando de arriba y abajo tienen
