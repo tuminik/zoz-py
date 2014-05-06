@@ -1,7 +1,7 @@
 	#
    # #
   # * #
- # # # #	
+ # # # # 
 # # # # #
 	
 un nodo tiene compañeros si sus espacios en blando de izq y der
