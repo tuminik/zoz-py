@@ -76,14 +76,12 @@ class Node:
 
     def expand(self, problem):
         "List the nodes reachable in one step from this node."
-        return [self.child_node(problem, action)
-                for action in problem.actions(self.state)]
+        return [self.child_node(problem, action) for action in problem.actions(self.state)]
 
     def child_node(self, problem, action):
         "Fig. 3.10"
         next = problem.result(self.state, action)
-        return Node(next, self, action,
-                    problem.path_cost(self.path_cost, self.state, action, next))
+        return Node(next, self, action, problem.path_cost(self.path_cost, self.state, action, next))
 
     def solution(self):
         "Return the sequence of actions to go from the root to this node."
