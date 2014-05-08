@@ -11,9 +11,7 @@ characters = [CHAR_FICHA, 		# Lista de caracteres permitidos dentro de un archiv
 			  
 def imprimir(lista):
     for i in lista:
-        #for j in range(len(lista[i])):
         print i
-        #print "\n\n"
 			
 def cantidadChar(lista, fila, char):
     cantidad = 0
@@ -78,13 +76,13 @@ def obtenerMapa(filename, fila, columna):
 
     return estado
 	
-"""def main():
+'''def main():
     columna = 0
     fila = 0	
     initial = obtenerMapa("problem", fila, columna)
-    print initial.matrix
+    imprimir(initial.matrix)
     print initial.matrixX
     print initial.matrixY
 	
 if __name__ == "__main__":
-    main()"""
+    main()'''
