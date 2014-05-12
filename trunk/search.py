@@ -6,6 +6,7 @@ functions."""
 
 from utils import *
 import math, random, sys, time, bisect, string
+from zozParser import imprimir
 
 #______________________________________________________________________________
 
@@ -75,13 +76,21 @@ class Node:
         return "<Node %s>" % (self.state,)
 
     def expand(self, problem):
+        #print "hola"
         "List the nodes reachable in one step from this node."
-        return [self.child_node(problem, action) for action in problem.actions(self.state)]
+        return [self.child_node(problem, action)
+                for action in problem.actions(self.state)]
 
     def child_node(self, problem, action):
         "Fig. 3.10"
+        #imprimir(self.state.matrix)
+        #print action
         next = problem.result(self.state, action)
-        return Node(next, self, action, problem.path_cost(self.path_cost, self.state, action, next))
+        #imprimir(next.matrix)
+        #print
+        #print
+        return Node(next, self, action,
+                    problem.path_cost(self.path_cost, self.state, action, next))
 
     def solution(self):
         "Return the sequence of actions to go from the root to this node."
@@ -210,10 +219,16 @@ def best_first_graph_search(problem, f):
     frontier = PriorityQueue(min, f)
     frontier.append(node)
     explored = set()
+    #c=0
     while frontier:
+        #print c
+        #c+=1
         node = frontier.pop()
         if problem.goal_test(node.state):
             return node
+        #print
+        #print
+        #print
         explored.add(node.state)
         for child in node.expand(problem):
             if child.state not in explored and child not in frontier:
@@ -261,12 +276,15 @@ def iterative_deepening_search(problem):
 
 greedy_best_first_graph_search = best_first_graph_search
     # Greedy best-first search is accomplished by specifying f(n) = h(n).
-
+def heuristica(state):
+    return zozHeuristic(state)
+    
 def astar_search(problem, h=None):
     """A* search is best-first graph search with f(n) = g(n)+h(n).
     You need to specify the h function when you call astar_search, or
     else in your Problem subclass."""
     h = memoize(h or problem.h, 'h')
+    #h = memoize(heristica, 'h')
     return best_first_graph_search(problem, lambda n: n.path_cost + h(n))
 
 #______________________________________________________________________________
