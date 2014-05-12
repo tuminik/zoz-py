@@ -4,47 +4,61 @@ import sys
 import copy
 
 from search import Problem
-from heuristic import zozHeuristic
 from constantes import *
+from heuristic import zozHeuristic
+from zozParser import imprimir
 
-def zozProblem(Problem)                                 #hereda la clase Problem de search.py
-    expand = 0
+class zozProblem(Problem):                                 #hereda la clase Problem de search.py
+    expanded = 0
     
     def _init_(self):                                   #recibe la tabla de juego y construye
         self.initial=self
         self.expanded = 0
 
     def goal_test(self, state):
-        spaces_s=0        
-        spaces_s = len(state.blank)
-        
-        if spaces_s == 1:
+        cantidad = 0
+        for i in range(state.matrixX):
+            cantidad += state.matrix[i].count(CHAR_FICHA)
+        #imprimir(state.matrix)
+        #print cantidad
+        #print len(state.blank)+1
+        #print
+        #print
+        if cantidad == 1:
+            #print "Entro en estado final"
             return True
         else:
+            #print "no Entro"
             return False
             
     def actions(self, state):
-        listMoves[]
-        listStates[]
+        listMoves=[]
         listMoves = generateMoves(state, listMoves)
-        self.expanded += 1
+        #print "nuevo:"
+        #print listMoves
         
         if not listMoves:                               #si la lista esta vacia, no hay movimientos posibles por ende no posibles sucesores
             return []                                   #retorna lista vacia la funcion sucesor
-        else:                                           #si la lista tiene algo!!           
+        else:                                          #si la lista tiene algo!!
             return listMoves
     
-    def result(self,  state, action)
+    def result(self,  state, action):
+        self.expanded += 1
+        #print self.expanded
         newState = state.clone()                        #generar nuevo estado
-        newState.movePlayer(action)              		#mueve el jugador
+        newState.movePlayer(action)                     #mueve el jugador
         return newState
         
     def h(self, node):
-        return zozHeuristic(node.state) 
+        return zozHeuristic(node.state)
         
 def generateMoves(state, listMoves):
     try:
-        for blank in state.blank
+        state.listBlank()
+        #print "blank:"
+        #print state.blank
+        for blank in state.blank:
+            state.playerX, state.playerY = blank
             if state.canMove(MOVE_RIGHT):
                 listMoves.append((MOVE_RIGHT, blank[0], blank[1]))
             if state.canMove(MOVE_LEFT):
@@ -60,20 +74,24 @@ def generateMoves(state, listMoves):
         
         return listMoves
     except:
+        print "error"
         return listMoves
         
 def generateGoalState(state):
     lista=[]
+    i=0
     goal = state.clone()
-    for i in len(goal.matrix)
-        for j in len(i)
-            if goal.matrix[i][j] == CHAR_FICHA
+    for linea in goal.matrix:
+        for j in range(len(linea)):
+            if goal.matrix[i][j] == CHAR_FICHA:
                 goal.matrix[i][j] = CHAR_SPACE
+        i+=1
  
-    for i in len(goal.matrix)
-        for j in len(i)
+    i=0
+    for linea in goal.matrix:
+        for j in range(len(linea)):
             goal.matrix[i][j] = CHAR_FICHA
             lista.append(goal.matrix)
             goal.matrix[i][j] = CHAR_SPACE
-
+        i+=1
     return lista

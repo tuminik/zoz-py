@@ -3,16 +3,18 @@ import sys
 
 from state import zozState
 from constantes import *
+#from problem import zozProblem
+#from search import astar_search
 
-characters = [CHAR_FICHA, 		# Lista de caracteres permitidos dentro de un archivo
+characters = [CHAR_FICHA,       # Lista de caracteres permitidos dentro de un archivo
               CHAR_SPACE, 
               CHAR_SPACE_O,
               '\n']
-			  
+              
 def imprimir(lista):
     for i in lista:
         print i
-			
+            
 def cantidadChar(lista, fila, char):
     cantidad = 0
     for i in range(fila):
@@ -25,7 +27,7 @@ def encuadrarLista(lista, columna):
          for j in range(columna - len(lista[i])):
             lista[i].append(CHAR_SPACE_O)
     return lista
-			
+            
 def obtenerIndiceLinea(linea, columna, char):
     try:
         return linea.index(char)
@@ -47,13 +49,13 @@ def obtieneTamFilCol(columna, fila, linea): #obtiene las dimensiones del mapa
                 
     fila += 1 #obtiene la fila
     return fila, columna
-	
+    
 def validaCaracteres(linea): #verifica si los caracteres extraidos del archivo son validos
     for i in range(len(linea)):
         if linea[i] not in characters:
             print linea[i], i #imprime el caracter invalido y la posicion
             sys.exit("algun caracter no es aceptado, Arreglelo!!")#al no ser validos detiene la ejecucion
-			
+            
 def obtenerMapa(filename, fila, columna):
     lista =[]
     with open(filename, 'r') as f: #abre y cierra el archivo apropiadamente incluso si se genero una excepcion
@@ -75,14 +77,24 @@ def obtenerMapa(filename, fila, columna):
     estado.matrixY = columna
 
     return estado
-	
+    
 '''def main():
     columna = 0
-    fila = 0	
+    fila = 0    
     initial = obtenerMapa("problem", fila, columna)
-    imprimir(initial.matrix)
-    print initial.matrixX
-    print initial.matrixY
-	
+    #imprimir(initial.matrix)
+    #print initial.matrixX
+    #print initial.matrixY
+    #print initial.blank
+    #print initial.playerX
+    #print initial.playerY
+    zoz=zozProblem(initial)
+    for action in zoz.actions(initial):
+        print 
+        #imprimir(zoz.result(initial, action).matrix)
+	search = astar_search(zoz)
+	#print search.path()
+	#print zozHeuristic(initial)
+    
 if __name__ == "__main__":
     main()'''
